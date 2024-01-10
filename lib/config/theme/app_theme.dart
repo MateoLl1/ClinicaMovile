@@ -25,6 +25,17 @@ class AppTheme {
       bodyMedium: GoogleFonts.exo2(
         fontSize: 15,
       ),
+
+      labelLarge: GoogleFonts.exo2(
+        fontSize: 20,
+        color: Colors.white
+      ),
+
+      labelMedium: GoogleFonts.exo2(
+        fontSize: 13,
+        color: Colors.white,
+        
+      ),
       
 
       //BOTONES CON FONDOS CLAROS

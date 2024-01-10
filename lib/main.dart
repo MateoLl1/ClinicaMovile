@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medi_meet/config/config.dart';
-import 'package:medi_meet/presentation/providers/dark_theme_provider.dart';
+import 'package:medi_meet/presentation/providers/providers.dart';
 
 void main(){
   runApp(const ProviderScope(child: MyApp()));

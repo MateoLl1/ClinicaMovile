@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
 class MenuLateral extends StatefulWidget {
-  const MenuLateral({super.key});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const MenuLateral({
+    super.key, 
+    required this.scaffoldKey
+  });
 
   @override
   State<MenuLateral> createState() => _MenuLateralState();
@@ -34,17 +39,26 @@ class _MenuLateralState extends State<MenuLateral> {
         ),
 
         const NavigationDrawerDestination(
-          icon: Icon(Icons.abc_outlined), 
-          label: Text('Inicio'),
+          icon: Icon(Icons.settings), 
+          label: Text('Configuración'),
+        ),
+        const SizedBox(height: 10,),
+
+        const NavigationDrawerDestination(
+          icon: Icon(Icons.account_circle), 
+          label: Text('Cuenta'),
+        ),
+        const SizedBox(height: 10,),
+
+        const NavigationDrawerDestination(
+          icon: Icon(Icons.help), 
+          label: Text('Ayuda'),
         ),
         const NavigationDrawerDestination(
-          icon: Icon(Icons.abc_outlined), 
-          label: Text('Inicio'),
+          icon: Icon(Icons.help), 
+          label: Text('Tutorial app'),
         ),
-        const NavigationDrawerDestination(
-          icon: Icon(Icons.abc_outlined), 
-          label: Text('Inicio'),
-        ),
+        const SizedBox(height: 10,),
 
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -58,7 +72,8 @@ class _MenuLateralState extends State<MenuLateral> {
           child: CustomFilledButton(
             label: 'Cerrar Session',
             onPressed: () {
-          
+              context.push('/login');
+              widget.scaffoldKey.currentState!.closeDrawer();
             },
           ),
         )
