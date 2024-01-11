@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medi_meet/config/config.dart';
 import 'package:medi_meet/presentation/providers/providers.dart';
 
-void main(){
+void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 

@@ -15,5 +15,10 @@ final appRouter = GoRouter(
       builder: (context, state) => const LoginScreen(),
     ),
 
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const SingInScreen(),
+    ),
+
   ]
 );

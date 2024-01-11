@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_meet/presentation/painters/painters.dart';
-import 'package:medi_meet/presentation/widgets/custom_button/custom_filled_button.dart';
-import 'package:medi_meet/presentation/widgets/custom_text_form/custom_text_form_field.dart';
+import 'package:medi_meet/presentation/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -79,7 +78,7 @@ class _LoginFormView extends StatelessWidget {
 
         InkWell(
           onTap: () {
-            
+            context.push('/register');
           },
           child: const Text(
             'Crear una cuentas',
