@@ -6,11 +6,13 @@ class CustomDateForm extends StatelessWidget {
   final String label;
   final DateTimeFieldPickerMode mode;
   final void Function(DateTime?)? onChanged;
+  final String? Function(DateTime?)? validator;
   const CustomDateForm({
     super.key, 
     required this.label, 
     required this.mode, 
-    this.onChanged
+    this.onChanged,
+    this.validator,
   });
 
   @override
@@ -19,13 +21,14 @@ class CustomDateForm extends StatelessWidget {
       mode: mode,
       lastDate: DateTime.now(),
       decoration:  InputDecoration(
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.zero
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5)
         ),
         label: Text(label),
         isDense: true
       ),
       onChanged: onChanged,
+      validator: validator,
     );
   }
 }

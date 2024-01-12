@@ -20,5 +20,10 @@ final appRouter = GoRouter(
       builder: (context, state) => const SingInScreen(),
     ),
 
+    GoRoute(
+      path: '/tutorialApp',
+      builder: (context, state) => const TutorialAppScreen(),
+    ),
+
   ]
 );

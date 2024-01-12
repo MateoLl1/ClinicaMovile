@@ -3,3 +3,5 @@ export './custom_text_form/custom_text_form_field.dart';
 export 'custom_button/custom_filled_button.dart';
 export 'cards/home_card.dart';
 export './custom_date_form/custom_date_form.dart';
+export 'helpers/scaffold_mesage.dart';
+export 'helpers/validar_cedula.dart';

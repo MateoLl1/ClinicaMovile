@@ -12,6 +12,12 @@ class MenuLateral extends StatefulWidget {
   @override
   State<MenuLateral> createState() => _MenuLateralState();
 }
+final routes = <String>[
+  '/setting',
+  '/cuenta',
+  '/help',
+  '/tutorialApp',
+];
 
 class _MenuLateralState extends State<MenuLateral> {
   int selectedIndex = 0;
@@ -22,6 +28,8 @@ class _MenuLateralState extends State<MenuLateral> {
       selectedIndex: selectedIndex,
       onDestinationSelected: (value) {
         selectedIndex = value;
+        context.push(routes[value]);
+        widget.scaffoldKey.currentState?.closeDrawer();
         setState(() {
           
         });
