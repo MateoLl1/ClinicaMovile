@@ -43,28 +43,31 @@ class _MenuLateralState extends State<MenuLateral> {
         
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Divider(),
-        ),
+          child: Text('Tu Bienestar, Nuestra Prioridad'),
+        ),const SizedBox(height: 20,),
 
-        const NavigationDrawerDestination(
-          icon: Icon(Icons.settings), 
-          label: Text('Configuración'),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.settings), 
+          label: Text('Configuración',style: textStyle.bodyMedium,),
         ),
         const SizedBox(height: 10,),
 
-        const NavigationDrawerDestination(
-          icon: Icon(Icons.account_circle), 
-          label: Text('Cuenta'),
+        NavigationDrawerDestination(
+          icon: const Icon(Icons.account_circle), 
+          label: Text('Cuenta',style: textStyle.bodyMedium),
         ),
         const SizedBox(height: 10,),
 
-        const NavigationDrawerDestination(
-          icon: Icon(Icons.help), 
-          label: Text('Ayuda'),
+         NavigationDrawerDestination(
+          icon: const Icon(Icons.help), 
+          label: Text('Ayuda',style: textStyle.bodyMedium),
         ),
-        const NavigationDrawerDestination(
-          icon: Icon(Icons.help), 
-          label: Text('Tutorial app'),
+
+        const SizedBox(height: 10,),
+
+         NavigationDrawerDestination(
+          icon: const Icon(Icons.help), 
+          label: Text('Tutorial app',style: textStyle.bodyMedium),
         ),
         const SizedBox(height: 10,),
 

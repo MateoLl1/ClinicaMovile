@@ -120,6 +120,7 @@ class _SliderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
+    final colors = Theme.of(context).colorScheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,10 +128,19 @@ class _SliderView extends StatelessWidget {
 
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image(
-            image: AssetImage(slide.image),
+          child: Container(
             width: 300,
-            fit: BoxFit.cover,
+            height: 300,
+            decoration: BoxDecoration(
+              color: colors.background
+            ),
+            child: FadeIn(
+              child: Image(
+                image: AssetImage(slide.image),
+                width: 300,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 10,),
