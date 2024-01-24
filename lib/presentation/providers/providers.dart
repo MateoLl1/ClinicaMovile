@@ -1,2 +1,2 @@
 
-export './dark_theme_provider.dart';
+export 'theme/dark_theme_provider.dart';
