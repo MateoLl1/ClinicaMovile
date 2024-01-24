@@ -1,8 +1,10 @@
 
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medi_meet/infrastructure/datasources/medi_meet_datasource.dart';
 import 'package:medi_meet/presentation/painters/painters.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
@@ -25,20 +27,10 @@ class LoginScreen extends StatelessWidget {
           child: ListView(
             children: [
           
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    size: 40,
-                    color: colorList.background,
-                  ),
-                  onPressed: () =>  context.pop(), 
-                ),
-              ),
+              
           
               Padding(
-                padding: EdgeInsets.symmetric(vertical: size.height*.22),
+                padding: EdgeInsets.symmetric(vertical: size.height*.3),
                 child: const _LoginFormView(),
               )
           
@@ -51,16 +43,16 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginFormView extends StatefulWidget {
+class _LoginFormView extends ConsumerStatefulWidget {
   const _LoginFormView();
 
   @override
-  State<_LoginFormView> createState() => _LoginFormViewState();
+  _LoginFormViewState createState() => _LoginFormViewState();
 }
 final _formKey = GlobalKey<FormState>();
 String _email = '';
 String _password = '';
-class _LoginFormViewState extends State<_LoginFormView> {
+class _LoginFormViewState extends ConsumerState<_LoginFormView> {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
@@ -125,10 +117,15 @@ class _LoginFormViewState extends State<_LoginFormView> {
             width: double.infinity,
             child: CustomFilledButton(
               label: 'Iniciar',
-              onPressed: () {
+              onPressed: ()async {
                 final isValidForm = _formKey.currentState?.validate();
                 if ( !isValidForm! ) return;
-                scaffoldMessage(context, 'Cargando datos');
+
+                final response = await MediMeetDatasource().validarCredenciales(_email, _password);
+                scaffoldMessage(context, response);
+                if (response == 'Bienvenido') {
+                  context.go('/dashboard');
+                }
               },
             ),
           )

@@ -12,13 +12,20 @@ class MediMeetDatasource extends ClinicaDatasource {
   );
 
   @override
-  Future<bool> validarCredenciales(String email, String password) async{
-    final response = await dio.post('/auth/login',data: {
+  Future<String> validarCredenciales(String email, String password) async{
+  try {
+      final response = await dio.post('/auth/login',data: {
       'email' : email,
       'password' : password,
-    });
-    print(response.data);
-    throw UnimplementedError();
+      });
+      if (response.data.isEmpty) {
+        return 'Credenciales incorrectas';
+      } else {
+        return 'Bienvenido';
+      }
+    } catch (e) {
+      return 'Error de conexion';
+    }
   }
   
   

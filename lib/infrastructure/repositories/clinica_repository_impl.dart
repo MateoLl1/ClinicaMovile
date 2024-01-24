@@ -9,7 +9,7 @@ class ClinicaRepositoryImpl extends ClinicaRepository {
   ClinicaRepositoryImpl({required this.datasource});
   
   @override
-  Future<bool> validarCredenciales(String email, String password) {
+  Future<String> validarCredenciales(String email, String password) {
     return datasource.validarCredenciales(email, password);
   }
 
