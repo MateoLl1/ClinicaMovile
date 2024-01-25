@@ -48,5 +48,6 @@ final List<InfoHomeCard> appHomeCard = [
     image: 'assets/images/vida.png', 
     color: Colors.redAccent
   ),
+  
 
 ];

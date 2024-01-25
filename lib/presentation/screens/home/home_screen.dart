@@ -46,7 +46,16 @@ class HomeScreen extends ConsumerWidget {
 
       drawer: MenuLateral(scaffoldKey: scaffoldKey),
 
-      body: SingleChildScrollView(child: _HomeView(usuario: usuario,)),
+      body: RefreshIndicator(
+        onRefresh: () {
+          return Future.delayed(const Duration(seconds: 1));
+        },
+        child: ListView(
+          children: [
+            _HomeView(usuario: usuario,)
+          ],
+        )
+      ),
     );
   }
 }
