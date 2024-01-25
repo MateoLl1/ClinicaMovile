@@ -4,6 +4,8 @@
 import 'package:dio/dio.dart';
 import 'package:medi_meet/config/config.dart';
 import 'package:medi_meet/domain/domain.dart';
+import 'package:medi_meet/infrastructure/mappers/usuario_mapper.dart';
+import 'package:medi_meet/infrastructure/models/models.dart';
 
 class MediMeetDatasource extends ClinicaDatasource {
   
@@ -12,21 +14,20 @@ class MediMeetDatasource extends ClinicaDatasource {
   );
 
   @override
-  Future<String> validarCredenciales(String email, String password) async{
-  try {
+  Future<Usuario?> validarCredenciales(String email, String password) async{
+    try {
       final response = await dio.post('/auth/login',data: {
-      'email' : email,
-      'password' : password,
-      });
-      if (response.data.isEmpty) {
-        return 'Credenciales incorrectas';
-      } else {
-        return 'Bienvenido';
-      }
+    'email' : email,
+    'password' : password,
+    });
+    final responseModel = GetUsuarioModel.fromJson(response.data[0]);
+    return UsuarioMapper.toEntityUsuario(responseModel);
     } catch (e) {
-      return 'Error de conexion';
+      return null;
     }
   }
+
+
   
   
   

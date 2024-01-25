@@ -1,7 +1,11 @@
 
 
 
+import 'package:medi_meet/domain/domain.dart';
+
 abstract class ClinicaDatasource {
 
-  Future<String> validarCredenciales(String email,String password);
+  Future<Usuario?> validarCredenciales(String email,String password);
+  
+ 
 }

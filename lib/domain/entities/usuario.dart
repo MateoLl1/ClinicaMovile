@@ -1,4 +1,5 @@
 enum Genero { masculino, femenino }
+enum Estado { validado , invalido  }
 
 class Usuario {
   final int id;
@@ -10,6 +11,7 @@ class Usuario {
   final DateTime fechaN;
   final DateTime fechaR;
   final Genero sexo;
+  final Estado status;
 
   Usuario({
     required this.id,
@@ -20,6 +22,7 @@ class Usuario {
     required this.imageUrl,
     required this.fechaN,
     required this.fechaR,
-    required this.sexo
+    required this.sexo,
+    required this.status
   });
 }

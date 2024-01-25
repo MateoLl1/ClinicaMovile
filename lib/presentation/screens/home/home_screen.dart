@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medi_meet/config/config.dart';
+import 'package:medi_meet/domain/domain.dart';
 import 'package:medi_meet/presentation/providers/providers.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context,ref) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
     final themeProvider = ref.watch(darkThemeProvider);
+    final usuario = ref.watch(userFuntionsProvider)[0];
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -32,9 +34,11 @@ class HomeScreen extends ConsumerWidget {
             }
           ),
 
-           const Padding(
-             padding: EdgeInsets.all(10),
-             child: CircleAvatar(),
+           Padding(
+             padding: const EdgeInsets.all(10),
+             child: CircleAvatar(
+                backgroundImage: NetworkImage(usuario.imageUrl),
+             ),
            )
 
         ],
@@ -42,13 +46,16 @@ class HomeScreen extends ConsumerWidget {
 
       drawer: MenuLateral(scaffoldKey: scaffoldKey),
 
-      body: const SingleChildScrollView(child: _HomeView()),
+      body: SingleChildScrollView(child: _HomeView(usuario: usuario,)),
     );
   }
 }
 
 class _HomeView extends StatelessWidget {
-  const _HomeView();
+  final Usuario usuario;
+  const _HomeView({
+    required this.usuario
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +70,7 @@ class _HomeView extends StatelessWidget {
             child: Row(
               children: [
                 Text('Hola, ',style: textStyle.titleLarge,),
-                Text('Mateo!',style: textStyle.titleLarge?.copyWith(
+                Text(usuario.names,style: textStyle.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600
                 ),),
               ],

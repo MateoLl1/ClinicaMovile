@@ -1,7 +1,5 @@
 
 
-
-
 class GetUsuarioModel {
     final int emId;
     final String emEmail;
@@ -43,5 +41,17 @@ class GetUsuarioModel {
         tpEmId: json["tp_em_id"],
     );
 
-    
+    Map<String, dynamic> toJson() => {
+        "em_id": emId,
+        "em_email": emEmail,
+        "em_password": emPassword,
+        "em_cedula": emCedula,
+        "em_nombres": emNombres,
+        "em_fecha_na": emFechaNa.toIso8601String(),
+        "em_imagen": emImagen,
+        "em_fecha_reg": emFechaReg.toIso8601String(),
+        "em_sexo": emSexo,
+        "em_estado": emEstado,
+        "tp_em_id": tpEmId,
+    };
 }

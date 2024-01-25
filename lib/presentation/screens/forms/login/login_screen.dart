@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_meet/infrastructure/datasources/medi_meet_datasource.dart';
 import 'package:medi_meet/presentation/painters/painters.dart';
+import 'package:medi_meet/presentation/providers/auth/usuario_provider.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -121,11 +122,14 @@ class _LoginFormViewState extends ConsumerState<_LoginFormView> {
                 final isValidForm = _formKey.currentState?.validate();
                 if ( !isValidForm! ) return;
 
-                final response = await MediMeetDatasource().validarCredenciales(_email, _password);
-                scaffoldMessage(context, response);
-                if (response == 'Bienvenido') {
-                  context.go('/dashboard');
-                }
+                final response = await ref.read(userFuntionsProvider.notifier)
+                  .loggin(_email, _password);
+                if (response) {
+                  scaffoldMessage(context, 'Bienvenido');
+                  context.go('/home');
+                }else{
+                  scaffoldMessage(context, 'Credenciales incorrectas');
+}
               },
             ),
           )

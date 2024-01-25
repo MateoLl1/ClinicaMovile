@@ -1,20 +1,24 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medi_meet/domain/domain.dart';
+import 'package:medi_meet/presentation/providers/providers.dart';
 
 final userFuntionsProvider = StateNotifierProvider<UsuarioNotifier,List<Usuario>>((ref) {
-  return UsuarioNotifier();
+  final repository = ref.watch(clinicaRepositoryProvider);
+  return UsuarioNotifier(repository: repository);
 });
 
 
 typedef UserCallback = Future<List<Usuario>> Function(String email,String password);
 
 class UsuarioNotifier extends StateNotifier<List<Usuario>> {
-  UsuarioNotifier(): super([]);
+  final ClinicaRepository repository;
+  UsuarioNotifier({required this.repository}): super([]);
 
-  
-  guardarUsuario(Usuario user){
-    state = [user];
+  Future<bool> loggin(String email,String password)async{
+    final result = await repository.validarCredenciales(email, password);
+    if (result == null) return false;
+    state = [result];
+    return true;
   }
-
 }
