@@ -5,14 +5,43 @@ import 'package:medi_meet/domain/domain.dart';
 import 'package:medi_meet/presentation/providers/providers.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context,ref) {
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends ConsumerState<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(especilidadesMedicasProvider.notifier).loadMoreEspMed();
+    ref.read(getNoticiasProvider.notifier).loadNoticias();
+  }
+
+  Future<void> recargarHome()async{
+    await ref.read(getNoticiasProvider.notifier).loadNoticias();
+    await ref.read(especilidadesMedicasProvider.notifier).loadMoreEspMed();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
     final themeProvider = ref.watch(darkThemeProvider);
     final usuario = ref.watch(userFuntionsProvider)[0];
+    final espMedicas = ref.watch(especilidadesMedicasProvider);
+    final noticias = ref.watch(getNoticiasProvider);
+
+    if (espMedicas.isEmpty || noticias.isEmpty) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator(),),
+      );
+    }
+
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -48,22 +77,32 @@ class HomeScreen extends ConsumerWidget {
 
       body: RefreshIndicator(
         onRefresh: () {
-          return Future.delayed(const Duration(seconds: 1));
+          return recargarHome();
         },
         child: ListView(
           children: [
-            _HomeView(usuario: usuario,)
+            _HomeView(
+              usuario: usuario,
+              espMedicas: espMedicas,
+              noticias: noticias,
+            )
           ],
         )
       ),
+
+
     );
   }
 }
 
 class _HomeView extends StatelessWidget {
   final Usuario usuario;
+  final List<EspMedica> espMedicas;
+  final List<Noticia> noticias;
   const _HomeView({
-    required this.usuario
+    required this.usuario,
+    required this.espMedicas,
+    required this.noticias
   });
 
   @override
@@ -74,19 +113,18 @@ class _HomeView extends StatelessWidget {
       child: Column(
         children: [
       
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              children: [
-                Text('Hola, ',style: textStyle.titleLarge,),
-                Text(usuario.names,style: textStyle.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600
-                ),),
-              ],
-            ),
-          ),
+          _Saludo(textStyle: textStyle, usuario: usuario),
+
+          const SizedBox(height: 10,),
+
+          NoticiasScrollView(noticias: noticias),
           
           const SizedBox(height: 10,),
+
+          EspecialidadesScrollView(espMedicas: espMedicas),
+          
+          const SizedBox(height: 20,),
+          
           
           ...appHomeCard.map(
             (e) => HomeCard(
@@ -100,6 +138,30 @@ class _HomeView extends StatelessWidget {
       
         ],
       ),
+    );
+  }
+}
+
+class _Saludo extends StatelessWidget {
+  const _Saludo({
+    required this.textStyle,
+    required this.usuario,
+  });
+
+  final TextTheme textStyle;
+  final Usuario usuario;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text('Hola, ',style: textStyle.titleLarge,),
+        Text(usuario.names,style: textStyle.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

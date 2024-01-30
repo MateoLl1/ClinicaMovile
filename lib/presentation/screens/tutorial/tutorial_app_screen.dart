@@ -87,7 +87,7 @@ bool inFinal = false;
             right: 20,
             child: TextButton(
               child: const Text('Salir'),
-              onPressed: () => context.pop(), 
+              onPressed: () => context.go('/home'), 
             )
           ),
 
@@ -100,7 +100,7 @@ bool inFinal = false;
               from: 20,
               child: FilledButton(
                 child: const Text('Comenzar'),
-                onPressed: () => context.pop(), 
+                onPressed: () => context.go('/home'), 
               ),
             )
           ): const SizedBox(),

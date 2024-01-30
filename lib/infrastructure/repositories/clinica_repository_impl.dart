@@ -12,6 +12,16 @@ class ClinicaRepositoryImpl extends ClinicaRepository {
   Future<Usuario?> validarCredenciales(String email, String password) {
     return datasource.validarCredenciales(email, password);
   }
+  
+  @override
+  Future<List<EspMedica>> getEspecMedicas() {
+    return datasource.getEspecMedicas();
+  }
+  
+  @override
+  Future<List<Noticia>> getNoticias() {
+    return datasource.getNoticias();
+  }
 
   
   

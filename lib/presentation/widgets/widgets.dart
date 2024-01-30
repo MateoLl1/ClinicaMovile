@@ -5,3 +5,6 @@ export 'cards/home_card.dart';
 export './custom_date_form/custom_date_form.dart';
 export 'helpers/scaffold_mesage.dart';
 export 'helpers/validar_cedula.dart';
+export './listviews/especilidades_scroll_view.dart';
+export './listviews/noticias_scrollview.dart';
+export './shadows/sombra_card.dart';

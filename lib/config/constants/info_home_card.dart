@@ -34,13 +34,7 @@ final List<InfoHomeCard> appHomeCard = [
     image: 'assets/images/historial.png', 
     color: Colors.green
   ),
-  InfoHomeCard(
-    title: 'Especilidades', 
-    caption: 'Nuestras especialidades medicas', 
-    url: '/especiliadad', 
-    image: 'assets/images/doctor.png', 
-    color: Colors.purple
-  ),
+  
   InfoHomeCard(
     title: 'Curiosidades', 
     caption: 'Habitos de vida', 
