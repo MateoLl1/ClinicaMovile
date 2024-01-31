@@ -6,6 +6,22 @@ final appRouter = GoRouter(
   routes: [
 
     GoRoute(
+      path: '/noticia/:id',
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '0';
+        return NoticiaScreen(id: id,);
+      },
+    ),
+
+    GoRoute(
+      path: '/especialidad/:id',
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '0';
+        return EspecialidadScreen(id: id,);
+      },
+    ),
+
+    GoRoute(
       path: '/home',
       builder: (context, state) => const HomeScreen(),
     ),

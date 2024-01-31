@@ -1,5 +1,4 @@
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_meet/domain/domain.dart';
@@ -38,7 +37,10 @@ class EspecialidadesScrollView extends StatelessWidget {
             itemCount: espMedicas.length,
             itemBuilder: (context, index) {
               final especialidad = espMedicas[index];
-              return _Item(especialidad: especialidad,);
+              return InkWell(
+                onTap: () => context.push('/especialidad/$index'),
+                child: _Item(especialidad: especialidad,)
+              );
             },
           ),
         ),
@@ -68,26 +70,20 @@ class _Item extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.transparent,
               ),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(20),
-                onTap: () {
-                  context.push('especialidad/${especialidad.id}');
+              child: Image.network(
+                especialidad.iconUrl,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    return const SombraCard(
+                      width: 60,
+                      height: 50,
+                    );
+                  }
+                  return child;
                 },
-                child: Image.network(
-                  especialidad.iconUrl,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress != null) {
-                      return const SombraCard(
-                        width: 60,
-                        height: 50,
-                      );
-                    }
-                    return child;
-                  },
-                ),
               ),
             ),
           ),

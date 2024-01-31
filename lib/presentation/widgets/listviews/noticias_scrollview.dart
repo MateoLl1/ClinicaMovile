@@ -35,7 +35,7 @@ class NoticiasScrollView extends StatelessWidget {
             itemBuilder: (context, index) {
               final noticia = noticias[index];
               return InkWell(
-                onTap: () => context.push('/noticias/$index'),
+                onTap: () => context.push('/noticia/$index'),
                 child: _NoticiaCard(noticia)
               );
             },

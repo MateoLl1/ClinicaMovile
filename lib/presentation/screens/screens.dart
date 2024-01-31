@@ -5,3 +5,5 @@ export './tutorial/tutorial_app_screen.dart';
 export './cuenta/cuenta_screen.dart';
 export './forms/login/login_screen.dart';
 export './forms/singup/sing_in_screen.dart';
+export './especilidad/especialidad_screen.dart';
+export './noticias/noticia_screen.dart';

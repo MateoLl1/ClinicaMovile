@@ -194,7 +194,9 @@ class _SingInFormViewState extends State<SingInFormView> {
                 onPressed: () {
                   final isValidForm = _formKey.currentState?.validate();
                   if (!isValidForm!) return;
-                  scaffoldMessage(context, 'Registrando');
+
+                  
+
                 },
               )),
           const SizedBox(

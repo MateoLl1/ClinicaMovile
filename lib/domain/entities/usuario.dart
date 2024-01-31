@@ -9,7 +9,7 @@ class Usuario {
   final String cedula;
   final String imageUrl;
   final DateTime fechaN;
-  final DateTime fechaR;
+  final DateTime? fechaR;
   final Genero sexo;
   final Estado status;
 
@@ -21,7 +21,7 @@ class Usuario {
     required this.cedula,
     required this.imageUrl,
     required this.fechaN,
-    required this.fechaR,
+    this.fechaR,
     required this.sexo,
     required this.status
   });
