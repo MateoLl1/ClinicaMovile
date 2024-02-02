@@ -49,6 +49,24 @@ class MediMeetDatasource extends ClinicaDatasource {
       (e) => GetNoticiasModel.fromJson(e).toEntityNoticia()).toList();
     return news;
   }
+  
+  @override
+  Future<Usuario?> registarUsuario(Usuario user)async {
+    try {
+      final response = await dio.post('/auth/singIn',data: {
+      'email' : user.email,
+      'cedula' : user.cedula,
+      'nombres' : user.names,
+      'fechaNa' : user.fechaN,
+      'sexo' : (user.sexo == Genero.masculino) ? 'M' : 'F',
+      });
+      final responseModel = GetUsuarioModel.fromJson(response.data[0]);
+      return UsuarioMapper.toEntityUsuario(responseModel);
+    } catch (e) {
+      print('Error al registrar $e');
+      return null;  
+    }
+  }
 
 
   

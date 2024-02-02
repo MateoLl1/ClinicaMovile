@@ -9,7 +9,7 @@ class UsuarioMapper {
     password: user.emPassword,
     cedula: user.emCedula,
     imageUrl: user.emImagen,
-    fechaN: user.emFechaNa,
+    fechaN: (user.emFechaNa).toString(),
     fechaR: user.emFechaReg,
     sexo: (user.emSexo == 'M') ? Genero.masculino : Genero.femenino,
     status: Estado.validado

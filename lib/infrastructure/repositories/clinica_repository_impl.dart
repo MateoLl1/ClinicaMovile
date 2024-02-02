@@ -22,6 +22,11 @@ class ClinicaRepositoryImpl extends ClinicaRepository {
   Future<List<Noticia>> getNoticias() {
     return datasource.getNoticias();
   }
+  
+  @override
+  Future<Usuario?> registarUsuario(Usuario user) {
+    return datasource.registarUsuario(user);
+  }
 
   
   

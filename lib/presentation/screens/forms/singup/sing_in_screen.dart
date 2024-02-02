@@ -1,9 +1,12 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:date_field/date_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medi_meet/domain/domain.dart';
 import 'package:medi_meet/presentation/painters/painters.dart';
+import 'package:medi_meet/presentation/providers/auth/usuario_provider.dart';
 import 'package:medi_meet/presentation/widgets/widgets.dart';
 
 class SingInScreen extends StatelessWidget {
@@ -56,13 +59,13 @@ class SingInScreen extends StatelessWidget {
   }
 }
 
-class SingInFormView extends StatefulWidget {
+class SingInFormView extends ConsumerStatefulWidget {
   const SingInFormView({
     super.key,
   });
 
   @override
-  State<SingInFormView> createState() => _SingInFormViewState();
+  SingInFormViewState createState() => SingInFormViewState();
 }
 
 enum SexoEnum { hombre, mujer }
@@ -75,7 +78,7 @@ String _email = '';
 String _dateFn = '';
 String _sexo = '';
 
-class _SingInFormViewState extends State<SingInFormView> {
+class SingInFormViewState extends ConsumerState<SingInFormView> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -191,11 +194,25 @@ class _SingInFormViewState extends State<SingInFormView> {
               width: double.infinity,
               child: CustomFilledButton(
                 label: 'Registrarme',
-                onPressed: () {
+                onPressed: ()async {
                   final isValidForm = _formKey.currentState?.validate();
                   if (!isValidForm!) return;
-
+                  final user = Usuario(
+                    names: _names, 
+                    email: _email, 
+                    cedula: _cedula, 
+                    fechaN: _dateFn, 
+                    sexo: (genero == SexoEnum.hombre)
+                    ? Genero.masculino : Genero.femenino
+                  );
                   
+                  final result = await ref.read(userFuntionsProvider.notifier).register(user);
+                  if (result) {
+                    scaffoldMessage(context, 'Registrado');
+                    context.go('/home');
+                  }else{
+                    scaffoldMessage(context, 'Usuario ya exite');
+                  }
 
                 },
               )),

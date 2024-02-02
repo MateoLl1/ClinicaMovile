@@ -66,7 +66,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
            Padding(
              padding: const EdgeInsets.all(10),
              child: CircleAvatar(
-                backgroundImage: NetworkImage(usuario.imageUrl),
+                backgroundImage: NetworkImage(usuario.imageUrl!),
              ),
            )
 

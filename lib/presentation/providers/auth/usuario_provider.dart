@@ -21,4 +21,11 @@ class UsuarioNotifier extends StateNotifier<List<Usuario>> {
     state = [result];
     return true;
   }
+
+  Future<bool> register(Usuario user)async{
+    final result = await repository.registarUsuario(user);
+    if (result == null) return false;
+    state = [result];
+    return true;
+  }
 }
